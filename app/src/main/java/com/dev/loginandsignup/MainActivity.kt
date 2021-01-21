@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.dev.details.DetailActivity
+import com.dev.details.Details
 import com.dev.loginandsignup.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,14 +25,14 @@ class MainActivity : AppCompatActivity() {
 
                 val intent: Intent
                 try{
-
-                    intent = Intent(this@MainActivity, Class.forName("com.dev.details.MainActivity"))
+                    DetailActivity.data = Details(signUpDetails.userName, signUpDetails.email, signUpDetails.phone, signUpDetails.password)
+                    intent = Intent(this@MainActivity, Class.forName("com.dev.details.DetailActivity"))
                     startActivity(intent)
                 }catch (ex: ClassNotFoundException){
                     ex.printStackTrace()
                 }
             }else{
-                Toast.makeText(this@MainActivity, "Something went wrong! Please try again later.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "This username doesn't have any account. Please create an account and try again.", Toast.LENGTH_LONG).show()
             }
         }
 
